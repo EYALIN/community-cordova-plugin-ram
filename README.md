@@ -1,68 +1,65 @@
-Certainly! Here's a README file template for your Cordova plugin:
+[![NPM version](https://img.shields.io/npm/v/community-cordova-plugin-ram)](https://www.npmjs.com/package/community-cordova-plugin-ram)
 
-```markdown
-# Cordova RAM Info Plugin
 
-The Cordova RAM Info Plugin is a simple Cordova plugin that allows you to retrieve information about the device's RAM (Random-Access Memory). It provides details such as total RAM, used RAM, free RAM, and RAM usage percentage.
+# community-cordova-plugin-ram 
 
-## Installation
+I dedicate a considerable amount of my free time to developing and maintaining many cordova plugins for the community ([See the list with all my maintained plugins][community_plugins]).
+To help ensure this plugin is kept updated,
+new features are added and bugfixes are implemented quickly,
+please donate a couple of dollars (or a little more if you can stretch) as this will help me to afford to dedicate time to its maintenance.
+Please consider donating if you're using this plugin in an app that makes you money,
+or if you're asking for new features or priority bug fixes. Thank you!
 
-To use this plugin in your Cordova project, you can install it using the following command:
+[![](https://img.shields.io/static/v1?label=Sponsor%20Me&style=for-the-badge&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/eyalin)
 
-```bash
-cordova plugin add cordova-ram-info
-```
-
-## Usage
-
-Once the plugin is installed, you can use the `CordovaRAMInfo` object to retrieve RAM information in your JavaScript code.
-
-```javascript
-CordovaRAMInfo.getRAMInfo(
-    function(info) {
-        // Handle the RAM information here
-        console.log("Total RAM: " + info.totalRAM + " bytes");
-        console.log("Used RAM: " + info.usedRAM + " bytes");
-        console.log("Free RAM: " + info.freeRAM + " bytes");
-        console.log("RAM Usage Percentage: " + info.ramUsagePercent + "%");
-    },
-    function(error) {
-        // Handle any errors here
-        console.error("Error: " + error);
-    }
-);
-```
-
-The `getRAMInfo` method returns an object with the following fields:
-
-- `totalRAM`: The total physical RAM available on the device in bytes.
-- `usedRAM`: The amount of RAM that is currently in use in bytes.
-- `freeRAM`: The amount of free RAM available for use in bytes.
-- `ramUsagePercent`: The percentage of RAM usage, calculated as (usedRAM / totalRAM) * 100.
-
-## Platform Support
-
-This plugin is designed to work on both Android and iOS platforms. The native implementations for retrieving RAM information are platform-specific and are provided for both Android (Java) and iOS (Objective-C).
-
-## License
-
-This Cordova plugin is released under the MIT License. You are free to use, modify, and distribute it as needed. See the [LICENSE](LICENSE) file for more details.
-
-## Issues and Contributions
-
-If you encounter any issues with this plugin or would like to contribute to its development, please visit the [GitHub repository](https://github.com/yourusername/cordova-ram-info) and open an issue or pull request.
-
-## Author
-
-This Cordova plugin was created by [Your Name](https://github.com/yourusername).
-
-## Acknowledgments
-
-Special thanks to the Cordova community and the developers who have contributed to the Cordova project.
 
 ---
 
-Happy coding!
+# Community Cordova Plugin RAM
+
+## Overview
+This Cordova plugin provides a way to access RAM (memory) information of the mobile device. It supports both Android and iOS platforms, returning the total, used and free memory as well as the current usage percentage.
+
+## Installation
+To install the plugin in your Cordova project, use the following command:
+```
+cordova plugin add community-cordova-plugin-ram
 ```
 
-Please replace `yourusername` with your GitHub username and update the author's name and contact information accordingly. Additionally, you may want to provide more detailed installation instructions if your plugin has any specific dependencies or configuration steps.
+## Usage
+To use the plugin, call the `getRAMInfo` method. This method is asynchronous and returns a Promise that resolves with the RAM information.
+
+```javascript
+document.addEventListener('deviceready', onDeviceReady, false);
+
+function onDeviceReady() {
+    RamPlugin.getRAMInfo().then(function(info) {
+        console.log('RAM Information:', info);
+    }).catch(function(error) {
+        console.error('Error getting RAM information:', error);
+    });
+}
+```
+
+### API
+
+#### getRAMInfo()
+Returns a Promise that resolves with an object containing RAM information. The response object is the same on both Android and iOS and includes:
+
+- `totalRAM`: The total physical RAM available on the device, in bytes.
+- `usedRAM`: The amount of RAM that is currently in use, in bytes.
+- `freeRAM`: The amount of free RAM available for use, in bytes.
+- `ramUsagePercent`: The percentage of RAM usage, calculated as `(usedRAM / totalRAM) * 100`.
+
+## Platform Specifics
+- **Android**: Returns total, used and free RAM (in bytes) and the usage percentage.
+- **iOS**: Returns the same set of values (total, used and free RAM in bytes and the usage percentage).
+
+## Contributing
+Contributions to the plugin are welcome. Please ensure to follow the coding standards and submit your pull requests for review.
+
+## License
+This project is licensed under the MIT License.
+
+---
+[community_plugins]: https://github.com/EYALIN?tab=repositories&q=community&type=&language=&sort=
